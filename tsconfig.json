@@ -6,8 +6,12 @@
       "preserveConstEnums": true,
       "outDir": "dist",
       "sourceMap": true,
-      "moduleResolution": "Node"
+      "moduleResolution": "Node",
+      "target": "ESNext"
     },
     "include": ["**/*.ts"],
-    "exclude": ["**/*.spec.ts"]
+    "exclude": [
+      "**/*.spec.ts",
+    "client/**"
+  ]
   }

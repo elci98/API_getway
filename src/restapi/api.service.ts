@@ -17,8 +17,12 @@ export class ApiService{
 		return this.instance.get(path, config);
 	}
     
-	postRequest(path:string , data:any, config?: AxiosRequestConfig<any>):Promise<any>{
-		return this.instance.post(path, data, config);
+	postRequest(path:string , data:any):Promise<any>{
+		return this.instance.post(path, data, {
+			headers:{
+				'Content-Type':'application/json'
+			}
+		});
 	}
 
 	putRequest(path:string , data:any, config?: AxiosRequestConfig<any>):Promise<any>{
