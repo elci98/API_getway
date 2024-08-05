@@ -23,7 +23,7 @@ authRouter.post('/login',  async(req, res)=>{
 			if(match){
 				const refresh_token = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {expiresIn: '3d'});
 				const access_token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15m'});
-		
+				delete result.data['password'];
 				return res.status(200).send({
 					...result?.data,
 					access_token,
@@ -52,14 +52,15 @@ authRouter.post('/register',  async(req, res)=>{
 		const _id=v4();
 		user['password'] = await bcrypt.hash(user['password'], saltRounds);
 		const result = await api.postRequest(`/auth/register?id=${_id}`, {
-			...user,
+			user,
 			_id
 		});
 
 		console.log(`[API Getway] Server responde with ${result?.status} for /auth?id=${_id} POST request`);
-		res.status(result?.status).send({message: `[API Getway]: user ${_id} logged in successfully`,
+		res.status(result?.status).send({message: `[API Getway]: user ${_id} registerd in successfully`,
 			access_token,
-			refresh_token
+			refresh_token,
+			_id
 		});
         
 	} catch (error) {
