@@ -35,6 +35,7 @@ export default [
 			indent: ['warn', 'tab'],
 			quotes: ['warn', 'single'],
 			semi: ['error', 'always'],
+			'@typescript-eslint/no-explicit-any': 'off'
 		},
 	},
 ];
